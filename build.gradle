@@ -1,0 +1,40 @@
+plugins {
+    id 'org.springframework.boot' version '2.4.11'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+//    mavenCentral()
+    jcenter()
+//    maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+    maven { url 'https://maven.aliyun.com/repository/public' }
+}
+
+dependencies {
+    compile group: 'io.springfox', name: 'springfox-swagger2', version:'2.9.2'
+    compile group: 'io.springfox', name: 'springfox-swagger-ui', version:'2.9.2'
+    compile "com.baomidou:mybatis-plus-boot-starter:3.3.0"
+    compile "com.baomidou:mybatis-plus-generator:3.3.2"
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.4'
+    compileOnly 'org.projectlombok:lombok'
+    runtimeOnly 'mysql:mysql-connector-java'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+    useJUnitPlatform()
+}
