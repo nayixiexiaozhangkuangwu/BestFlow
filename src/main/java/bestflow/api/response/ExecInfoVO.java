@@ -1,7 +1,7 @@
 package bestflow.api.response;
 
-import bestflow.entity.FlowInfo;
-import bestflow.entity.FlowSub;
+import bestflow.entity.ExecInfo;
+import bestflow.entity.ExecSub;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -12,6 +12,6 @@ import java.util.List;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class FlowInfoVO extends FlowInfo {
-    private List<FlowSub> flowSubs;
+public class ExecInfoVO extends ExecInfo {
+    private List<ExecSub> execSubs;
 }
