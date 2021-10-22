@@ -7,3 +7,5 @@
 * 使用工具自动生成代码
 * Spring boot架构
 * 根据表结构自动生产基础代码
+* swagger地址 <br>
+  http://127.0.0.1:7055/swagger-ui.html#/

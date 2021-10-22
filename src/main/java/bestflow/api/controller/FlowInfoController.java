@@ -6,10 +6,7 @@ import bestflow.api.response.RestResponse;
 import bestflow.service.FlowInfoService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -27,7 +24,7 @@ public class FlowInfoController {
     private FlowInfoService flowInfoService;
 
     @ApiOperation(value = "查看工作流执行情况")
-    @GetMapping("/list")
+    @PostMapping("/list")
     public RestResponse list(@RequestBody FlowBo bo) {
 
         return RestResponse.success(flowInfoService.listAll(bo));
