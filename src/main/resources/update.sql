@@ -73,15 +73,19 @@ create table flow_project
 )
     comment '工作流对接项目表';
 
+
+
 -- auto-generated definition
 create table flow_sub
 (
     id          tinyint auto_increment comment '主键'
         primary key,
-    sub_name    varchar(16) default '子任务名称' not null,
-    insert_date datetime                    not null comment '插入时间',
-    update_date datetime                    not null comment '更新时间'
+    sub_name    varchar(16) default '' not null comment '子任务名称',
+    insert_date datetime               not null comment '插入时间',
+    update_date datetime               not null comment '更新时间'
 )
     comment '工作流子任务表';
+
+
 
 

@@ -30,6 +30,7 @@ public class FlowSub implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
+    @ApiModelProperty(value = "子任务名称")
     private String subName;
 
     @ApiModelProperty(value = "插入时间")
