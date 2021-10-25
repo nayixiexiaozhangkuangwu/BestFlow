@@ -1,9 +1,15 @@
 package bestflow.api.controller;
 
 
-import org.springframework.web.bind.annotation.RequestMapping;
+import bestflow.api.response.RestResponse;
+import bestflow.entity.FlowMain;
+import bestflow.service.FlowMainService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
 
 /**
  * <p>
@@ -13,9 +19,35 @@ import org.springframework.web.bind.annotation.RestController;
  * @author weijie.wu
  * @since 2021-10-23
  */
+@Api(value = "任务管理")
 @RestController
 @RequestMapping("/flow-main")
 public class FlowMainController {
+
+    @Autowired
+    private FlowMainService flowMainService;
+
+    @ApiOperation(value = "添加")
+    @PostMapping("/add")
+    public RestResponse add(
+            @RequestBody FlowMain flowMain
+    ) {
+
+        flowMainService.saveOrUpdate(flowMain);
+
+        return RestResponse.success();
+    }
+
+    @ApiOperation(value = "删除")
+    @DeleteMapping("/delete")
+    public RestResponse delete(
+            @RequestBody List<Integer> ids
+    ) {
+        flowMainService.removeByIds(ids);
+
+        return RestResponse.success();
+    }
+
 
 }
 

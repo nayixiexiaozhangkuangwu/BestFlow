@@ -1,9 +1,14 @@
 package bestflow.api.controller;
 
 
-import org.springframework.web.bind.annotation.RequestMapping;
+import bestflow.api.response.RestResponse;
+import bestflow.entity.FlowSub;
+import bestflow.service.FlowSubService;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
 
 /**
  * <p>
@@ -16,6 +21,28 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/flow-sub")
 public class FlowSubController {
+
+    @Autowired
+    private FlowSubService flowSubService;
+
+    @ApiOperation(value = "添加")
+    @PostMapping("/add")
+    public RestResponse add(
+            @RequestBody FlowSub flowSub
+    ) {
+        flowSubService.saveOrUpdate(flowSub);
+
+        return RestResponse.success();
+    }
+
+    @ApiOperation(value = "删除")
+    @DeleteMapping("/delete")
+    public RestResponse delete(@RequestBody List<Integer> ids) {
+
+        flowSubService.removeByIds(ids);
+
+        return RestResponse.success();
+    }
 
 }
 
