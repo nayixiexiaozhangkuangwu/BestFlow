@@ -28,9 +28,9 @@ public class FlowSubController {
     @ApiOperation(value = "添加")
     @PostMapping("/add")
     public RestResponse add(
-            @RequestBody FlowSub flowSub
+            @RequestBody List<FlowSub> flowSubs
     ) {
-        flowSubService.saveOrUpdate(flowSub);
+        flowSubService.saveOrUpdateBatch(flowSubs);
 
         return RestResponse.success();
     }
@@ -42,6 +42,13 @@ public class FlowSubController {
         flowSubService.removeByIds(ids);
 
         return RestResponse.success();
+    }
+
+    @ApiOperation(value = "查询")
+    @GetMapping("/list")
+    public List<FlowSub> list() {
+
+        return flowSubService.list();
     }
 
 }

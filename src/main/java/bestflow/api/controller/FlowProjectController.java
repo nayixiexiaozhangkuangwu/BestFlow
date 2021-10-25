@@ -44,5 +44,12 @@ public class FlowProjectController {
 
         return RestResponse.success();
     }
+
+    @ApiOperation(value = "查询")
+    @GetMapping("/list")
+    public List<FlowProject> list() {
+
+        return flowProjectService.list();
+    }
 }
 

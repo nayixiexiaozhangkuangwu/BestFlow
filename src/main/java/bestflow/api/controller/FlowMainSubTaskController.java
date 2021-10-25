@@ -43,5 +43,11 @@ public class FlowMainSubTaskController {
         return RestResponse.success();
     }
 
+    @ApiOperation(value = "查询")
+    @GetMapping("/list")
+    public List<FlowMainSubTask> list() {
+
+        return flowMainSubTaskService.list();
+    }
 }
 

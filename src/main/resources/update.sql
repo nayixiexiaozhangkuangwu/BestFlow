@@ -39,7 +39,7 @@ create table flow_main
 (
     id          tinyint auto_increment comment '主键'
         primary key,
-    flow_name   varchar(16) default '' not null comment '任务流名称',
+    flow_name   varchar(32) default '' not null comment '任务流名称',
     insert_date datetime               not null comment '插入时间',
     update_date datetime               not null comment '更新时间'
 )
@@ -65,7 +65,7 @@ create table flow_project
 (
     id           tinyint auto_increment comment '主键'
         primary key,
-    project_name varchar(16)  default '' not null comment '项目名称',
+    project_name varchar(32)  default '' not null comment '项目名称',
     project_url  varchar(16)  default '' not null comment '项目URL',
     project_desc varchar(128) default '' not null comment '项目描述',
     insert_date  datetime                not null comment '插入时间',
@@ -80,7 +80,7 @@ create table flow_sub
 (
     id          tinyint auto_increment comment '主键'
         primary key,
-    sub_name    varchar(16) default '' not null comment '子任务名称',
+    sub_name    varchar(32) default '' not null comment '子任务名称',
     insert_date datetime               not null comment '插入时间',
     update_date datetime               not null comment '更新时间'
 )

@@ -1,5 +1,13 @@
 package bestflow;
 
+import bestflow.api.controller.FlowMainController;
+import bestflow.api.controller.FlowMainSubTaskController;
+import bestflow.api.controller.FlowProjectController;
+import bestflow.api.controller.FlowSubController;
+import bestflow.entity.FlowMain;
+import bestflow.entity.FlowMainSubTask;
+import bestflow.entity.FlowProject;
+import bestflow.entity.FlowSub;
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
@@ -10,7 +18,13 @@ import com.baomidou.mybatisplus.generator.config.StrategyConfig;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @SpringBootTest
 class ApplicationTests {
@@ -77,6 +91,76 @@ class ApplicationTests {
 
         // 6、执行
         mpg.execute();
+    }
+
+    @Autowired
+    private FlowProjectController flowProjectController;
+
+    @Autowired
+    private FlowMainController flowMainController;
+
+    @Autowired
+    private FlowSubController flowSubController;
+
+    @Autowired
+    private FlowMainSubTaskController flowMainSubTaskController;
+
+    @Test
+    void createTask() {
+//        insertData();
+        deleteData();
+
+
+    }
+
+    private void deleteData() {
+        flowProjectController.delete(flowProjectController.list().stream().map(FlowProject::getId).collect(Collectors.toList()));
+        flowMainController.delete(flowMainController.list().stream().map(FlowMain::getId).collect(Collectors.toList()));
+        flowSubController.delete(flowSubController.list().stream().map(FlowSub::getId).collect(Collectors.toList()));
+        flowMainSubTaskController.delete(flowMainSubTaskController.list().stream().map(FlowMainSubTask::getId).collect(Collectors.toList()));
+    }
+
+    private void insertData() {
+        /*添加项目-test*/
+        FlowProject flowProject = new FlowProject();
+        flowProject.setId(1);
+        flowProject.setProjectDesc("test");
+        flowProject.setProjectUrl("http://test");
+        flowProject.setProjectName("test-wu");
+        flowProjectController.add(flowProject);
+
+        /*主任务-做红烧肉*/
+        FlowMain flowMain = new FlowMain();
+        flowMain.setFlowName("braised_pork_in_soy_sauce");
+        flowMain.setId(1);
+        flowMainController.add(flowMain);
+
+        /*子任务-*/
+        List<FlowSub> flowSubs = new ArrayList<>();
+        List<String> subs = Arrays.asList("cut_meat", "wash_meat", "fry_meat", "add_chili", "cook_meat", "add_sugar");
+        int i = 0;
+        for (String sub: subs) {
+
+            FlowSub flowSub = new FlowSub();
+            flowSub.setSubName(sub);
+            flowSub.setId(i);
+            flowSubs.add(flowSub);
+            i++;
+        }
+
+        flowSubController.add(flowSubs);
+
+        /*添加任务流关联表*/
+        List<FlowMainSubTask> flowMainSubTasks = new ArrayList<>();
+        for (int j = 0 ; j < subs.size(); j++) {
+            FlowMainSubTask flowMainSubTask = new FlowMainSubTask();
+            flowMainSubTask.setMainId(1);
+            flowMainSubTask.setSubId(j);
+            flowMainSubTask.setExecLevel(j);
+            flowMainSubTask.setProjectId(1);
+            flowMainSubTasks.add(flowMainSubTask);
+        }
+        flowMainSubTaskController.add(flowMainSubTasks);
     }
 
 }
