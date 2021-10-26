@@ -9,7 +9,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -58,9 +57,12 @@ public class FlowMainController {
 
     @ApiOperation(value = "任务详情")
     @GetMapping("/list/detail")
-    public List listDetail() {
+    public RestResponse listDetail() {
 
-        return new ArrayList();
+
+
+
+        return RestResponse.success();
     }
 }
 

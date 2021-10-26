@@ -107,8 +107,8 @@ class ApplicationTests {
 
     @Test
     void createTask() {
-//        insertData();
-        deleteData();
+        insertData();
+//        deleteData();
 
 
     }

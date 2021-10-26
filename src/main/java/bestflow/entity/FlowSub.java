@@ -43,5 +43,7 @@ public class FlowSub implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date updateDate;
 
+    @TableField(exist = false)
+    private Integer execLevel;
 
 }

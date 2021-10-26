@@ -1,5 +1,6 @@
 package bestflow.service.impl;
 
+import bestflow.api.response.FlowInfoVO;
 import bestflow.entity.FlowMain;
 import bestflow.mapper.FlowMainMapper;
 import bestflow.service.FlowMainService;
@@ -17,4 +18,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class FlowMainServiceImpl extends ServiceImpl<FlowMainMapper, FlowMain> implements FlowMainService {
 
+    @Override
+    public FlowInfoVO getFlowInfo() {
+        FlowInfoVO flowInfoVO = new FlowInfoVO();
+
+
+
+        return flowInfoVO;
+    }
 }
