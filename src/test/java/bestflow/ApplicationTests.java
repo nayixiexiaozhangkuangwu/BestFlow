@@ -107,9 +107,9 @@ class ApplicationTests {
 
     @Test
     void createTask() {
-        insertData();
-//        deleteData();
 
+        deleteData();
+        insertData();
 
     }
 
@@ -123,7 +123,6 @@ class ApplicationTests {
     private void insertData() {
         /*添加项目-test*/
         FlowProject flowProject = new FlowProject();
-        flowProject.setId(1);
         flowProject.setProjectDesc("test");
         flowProject.setProjectUrl("http://test");
         flowProject.setProjectName("test-wu");
@@ -132,7 +131,6 @@ class ApplicationTests {
         /*主任务-做红烧肉*/
         FlowMain flowMain = new FlowMain();
         flowMain.setFlowName("braised_pork_in_soy_sauce");
-        flowMain.setId(1);
         flowMainController.add(flowMain);
 
         /*子任务-*/
@@ -143,7 +141,6 @@ class ApplicationTests {
 
             FlowSub flowSub = new FlowSub();
             flowSub.setSubName(sub);
-            flowSub.setId(i);
             flowSubs.add(flowSub);
             i++;
         }
@@ -154,10 +151,10 @@ class ApplicationTests {
         List<FlowMainSubTask> flowMainSubTasks = new ArrayList<>();
         for (int j = 0 ; j < subs.size(); j++) {
             FlowMainSubTask flowMainSubTask = new FlowMainSubTask();
-            flowMainSubTask.setMainId(1);
-            flowMainSubTask.setSubId(j);
+            flowMainSubTask.setMainId(flowMainController.list().get(0).getId());
+            flowMainSubTask.setSubId(flowSubs.get(j).getId());
             flowMainSubTask.setExecLevel(j);
-            flowMainSubTask.setProjectId(1);
+            flowMainSubTask.setProjectId(flowProjectController.list().get(0).getId());
             flowMainSubTasks.add(flowMainSubTask);
         }
         flowMainSubTaskController.add(flowMainSubTasks);

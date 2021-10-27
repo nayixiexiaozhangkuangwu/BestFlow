@@ -59,10 +59,7 @@ public class FlowMainController {
     @GetMapping("/list/detail")
     public RestResponse listDetail() {
 
-
-
-
-        return RestResponse.success();
+        return RestResponse.success(flowMainService.getFlowInfo());
     }
 }
 
