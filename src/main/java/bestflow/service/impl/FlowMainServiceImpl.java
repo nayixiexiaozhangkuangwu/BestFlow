@@ -42,7 +42,7 @@ public class FlowMainServiceImpl extends ServiceImpl<FlowMainMapper, FlowMain> i
     public List<FlowInfoVO> getFlowInfo() {
         List<FlowInfoVO> flowInfoVOS = new ArrayList<>();
 
-        List<FlowMain> flowMains = list();
+        List<FlowMain> flowMains = list(new QueryWrapper<FlowMain>().eq("is_valid", 1));
         for (FlowMain flowMain : flowMains) {
             FlowInfoVO flowInfoVO = new FlowInfoVO();
             flowInfoVO.setMainId(flowMain.getId());

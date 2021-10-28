@@ -131,6 +131,7 @@ class ApplicationTests {
         /*主任务-做红烧肉*/
         FlowMain flowMain = new FlowMain();
         flowMain.setFlowName("braised_pork_in_soy_sauce");
+        flowMain.setIsValid(1);
         flowMainController.add(flowMain);
 
         /*子任务-*/
