@@ -33,6 +33,9 @@ public class FlowSub implements Serializable {
     @ApiModelProperty(value = "子任务名称")
     private String subName;
 
+    @ApiModelProperty(value = "操作对象ID")
+    private Integer objId;
+
     @ApiModelProperty(value = "插入时间")
     @TableField(fill = FieldFill.INSERT)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")

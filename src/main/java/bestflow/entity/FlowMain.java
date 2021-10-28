@@ -36,6 +36,9 @@ public class FlowMain implements Serializable {
     @ApiModelProperty(value = "任务是否有效0无/1有")
     private Integer isValid;
 
+    @ApiModelProperty(value = "操作对象ID")
+    private Integer objId;
+
     @ApiModelProperty(value = "插入时间")
     @TableField(fill = FieldFill.INSERT)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")

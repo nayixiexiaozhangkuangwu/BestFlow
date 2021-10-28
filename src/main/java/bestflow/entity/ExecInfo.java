@@ -31,7 +31,7 @@ public class ExecInfo implements Serializable {
     private String id;
 
     @ApiModelProperty(value = "操作对象ID")
-    private String objId;
+    private Integer objId;
 
     @ApiModelProperty(value = "任务流action")
     private String flowAction;
@@ -40,7 +40,10 @@ public class ExecInfo implements Serializable {
     private String flowParam;
 
     @ApiModelProperty(value = "任务流状态")
-    private String flowState;
+    private ExecState flowState;
+
+    @ApiModelProperty(value = "用户ID")
+    private String userId;
 
     @ApiModelProperty(value = "错误信息")
     private String errMsg;

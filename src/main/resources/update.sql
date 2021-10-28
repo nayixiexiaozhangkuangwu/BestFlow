@@ -7,7 +7,7 @@ create table exec_info
         primary key,
     obj_id      varchar(36)   default '' not null comment '操作对象ID',
     user_id     int                      not null comment '用户ID',
-    flow_action varchar(16)   default '' not null comment '任务流action',
+    flow_action varchar(36)   default '' not null comment '任务流action',
     flow_param  varchar(1024) default '' not null comment '任务流详情',
     flow_state  varchar(8)    default '' not null comment '任务流状态',
     err_msg     text          default '' not null comment '错误信息',
@@ -19,19 +19,16 @@ create table exec_info
 
 
 -- auto-generated definition
-create table exec_sub
+create table flow_sub
 (
-    id          varchar(36)            not null comment '主键ID'
+    id          tinyint auto_increment comment '主键'
         primary key,
-    obj_id      varchar(36) default '' not null comment '操作对象ID',
-    flow_id     varchar(36) default '' not null comment '主任务ID',
-    sub_action  varchar(16) default '' not null comment '子任务action',
-    sub_state   varchar(8)  default '' not null comment '任务流状态',
-    err_msg     text        default '' not null comment '错误信息',
+    sub_name    varchar(32) default '' not null comment '子任务名称',
+    obj_id      tinyint     default 0  null comment '操作对象ID',
     insert_date datetime               not null comment '插入时间',
-    update_date datetime               not null comment '更新日期'
+    update_date datetime               not null comment '更新时间'
 )
-    comment '子任务执行表';
+    comment '工作流子任务表';
 
 
 -- auto-generated definition
@@ -40,6 +37,8 @@ create table flow_main
     id          tinyint auto_increment comment '主键'
         primary key,
     flow_name   varchar(32) default '' not null comment '任务流名称',
+    is_valid    tinyint     default 0  null comment '任务是否有效0无/1有',
+    obj_id      tinyint     default 0  null comment '操作对象ID',
     insert_date datetime               not null comment '插入时间',
     update_date datetime               not null comment '更新时间'
 )

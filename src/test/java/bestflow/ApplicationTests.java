@@ -4,10 +4,8 @@ import bestflow.api.controller.FlowMainController;
 import bestflow.api.controller.FlowMainSubTaskController;
 import bestflow.api.controller.FlowProjectController;
 import bestflow.api.controller.FlowSubController;
-import bestflow.entity.FlowMain;
-import bestflow.entity.FlowMainSubTask;
-import bestflow.entity.FlowProject;
-import bestflow.entity.FlowSub;
+import bestflow.entity.*;
+import bestflow.service.ExecInfoService;
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
@@ -24,6 +22,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @SpringBootTest
@@ -105,6 +104,9 @@ class ApplicationTests {
     @Autowired
     private FlowMainSubTaskController flowMainSubTaskController;
 
+    @Autowired
+    private ExecInfoService execInfoService;
+
     @Test
     void createTask() {
 
@@ -132,6 +134,7 @@ class ApplicationTests {
         FlowMain flowMain = new FlowMain();
         flowMain.setFlowName("braised_pork_in_soy_sauce");
         flowMain.setIsValid(1);
+        flowMain.setObjId(flowProjectController.list().get(0).getId());
         flowMainController.add(flowMain);
 
         /*子任务-*/
@@ -142,6 +145,7 @@ class ApplicationTests {
 
             FlowSub flowSub = new FlowSub();
             flowSub.setSubName(sub);
+            flowSub.setObjId(flowProjectController.list().get(0).getId());
             flowSubs.add(flowSub);
             i++;
         }
@@ -159,6 +163,17 @@ class ApplicationTests {
             flowMainSubTasks.add(flowMainSubTask);
         }
         flowMainSubTaskController.add(flowMainSubTasks);
+
+
+        ExecInfo execInfo  = new ExecInfo();
+        FlowMain main = flowMainController.list().get(0);
+        execInfo.setId(UUID.randomUUID().toString());
+        execInfo.setFlowAction(main.getFlowName());
+        execInfo.setObjId(main.getObjId());
+        execInfo.setFlowParam("meat,water");
+        execInfo.setUserId("123456");
+        execInfo.setFlowState(ExecState.Running);
+        execInfoService.save(execInfo);
     }
 
 }
