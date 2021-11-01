@@ -27,7 +27,8 @@ dependencies {
     compile "com.baomidou:mybatis-plus-boot-starter:3.3.0"
     compile "com.baomidou:mybatis-plus-generator:3.3.2"
 
-    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation('org.springframework.boot:spring-boot-starter-web')
+    implementation('org.springframework.boot:spring-boot-starter-aop')
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.4'
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'mysql:mysql-connector-java'

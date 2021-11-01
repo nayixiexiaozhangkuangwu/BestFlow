@@ -1,0 +1,45 @@
+Configuration:
+  status: warn
+  Properties: # 定义全局变量
+      Property:
+        - name: log.level.console
+          value: INFO
+        - name: log.action
+          value: app/logs
+        - name: project.name
+          value: best_flow
+  Appenders:
+      Console:  #输出到控制台
+        name: CONSOLE
+        target: SYSTEM_OUT
+        ThresholdFilter:
+          level: ${log.level.console}
+          onMatch: ACCEPT
+          onMismatch: DENY
+        PatternLayout:
+          pattern: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+      RollingFile: # 每24小时生产一个日志文件
+        - name: ROLLING_FILE
+          ignoreExceptions: true
+          fileName: ${log.action}/${project.name}.log
+          filePattern: "${log.action}/$${date:yyyy-MM}/${project.name}-%d{yyyy-MM-dd}-%i.log"
+          PatternLayout:
+            pattern: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger.%M:%L - %msg%n"
+          Policies:
+            TimeBasedTriggeringPolicy:
+              interval: 1
+          DefaultRolloverStrategy:
+            max: 30
+  Loggers:
+      Root:
+        level: INFO
+        AppenderRef:
+          - ref: CONSOLE
+          - ref: ROLLING_FILE
+      logger:
+        name: bestflow
+        level: INFO
+        additivity: false
+        AppenderRef:
+          - ref: CONSOLE
+          - ref: ROLLING_FILE

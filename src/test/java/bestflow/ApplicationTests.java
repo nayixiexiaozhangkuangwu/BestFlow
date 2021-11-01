@@ -6,8 +6,10 @@ import bestflow.api.controller.FlowProjectController;
 import bestflow.api.controller.FlowSubController;
 import bestflow.entity.*;
 import bestflow.service.ExecInfoService;
+import bestflow.service.ExecSubService;
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
 import com.baomidou.mybatisplus.generator.config.GlobalConfig;
@@ -107,6 +109,9 @@ class ApplicationTests {
     @Autowired
     private ExecInfoService execInfoService;
 
+    @Autowired
+    private ExecSubService execSubService;
+
     @Test
     void createTask() {
 
@@ -120,6 +125,8 @@ class ApplicationTests {
         flowMainController.delete(flowMainController.list().stream().map(FlowMain::getId).collect(Collectors.toList()));
         flowSubController.delete(flowSubController.list().stream().map(FlowSub::getId).collect(Collectors.toList()));
         flowMainSubTaskController.delete(flowMainSubTaskController.list().stream().map(FlowMainSubTask::getId).collect(Collectors.toList()));
+        execSubService.remove(new QueryWrapper<>());
+        execInfoService.remove(new QueryWrapper<>());
     }
 
     private void insertData() {
