@@ -31,7 +31,7 @@ public class ExecSub implements Serializable {
     private String id;
 
     @ApiModelProperty(value = "操作对象ID")
-    private String objId;
+    private Integer objId;
 
     @ApiModelProperty(value = "主任务ID")
     private String flowId;

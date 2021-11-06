@@ -22,4 +22,6 @@ public interface ExecInfoService extends IService<ExecInfo> {
      */
     List<ExecInfoVO> listAll(FlowBo bo);
 
+    void execFlow(ExecInfo execInfo) throws InterruptedException;
+
 }
